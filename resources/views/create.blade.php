@@ -13,6 +13,7 @@
     <body class="antialiased">
 
         <a href="{{ url('/join') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Unirse a partida</a>
+        <h2>Crear partida</h2>
 
 
         <form method="POST" action="/create">

@@ -46,5 +46,14 @@
             @endforeach
         </div>
 
+        <div>
+            Jugadores: {{ $board->player1 }} vs {{ $board->player2 }}
+        </div>
+        <div>
+            Turno: {{ $board->turn == 1 ? $board->player1 : $board->player2 }}
+        </div>
+        <div>
+            {{print_r($board->board)}}
+        </div>
     </body>
 </html>

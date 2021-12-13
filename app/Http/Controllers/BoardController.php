@@ -32,7 +32,7 @@ class BoardController extends Controller
             $board->fill([
                 'player1' => $playerName,
                 'player2' => '',
-                'turn' => 1,
+                'turn' => intval(1),
                 'board' => [
                     1 => '',
                     2 => '',
@@ -60,6 +60,26 @@ class BoardController extends Controller
      */
     public function join(Request $request)
     {
+        if ($request->input('playerName') && $request->input('boardId')) {
+            $playerName = $request->input('playerName');
+            $board = Board::find($request->input('boardId'));
+            if ($board) {
+                if ($board->player2 == '') {
+                    $board->player2 = $playerName;
+                    $board->save();
+                    return redirect('/board/' . $board->id);
+                }
+                return view('join', [
+                    'playerName' => $playerName,
+                    'error' => 'This game is full'
+                ]);
+
+            }
+            return view('join', [
+                'playerName' => $playerName,
+                'error' => 'This game does not exist'
+            ]);
+        }
         return view('join');
     }
 
@@ -90,6 +110,7 @@ class BoardController extends Controller
     {
         $board = Board::find($id);
         if ($board) {
+            $board->status = $board->getStatus();
             return $board;
         }
         return redirect('/');
@@ -111,11 +132,13 @@ class BoardController extends Controller
                 'board' => $request->input('board'),
             ]);
             if ($board->save()) {
+                $board->status = $board->getStatus();
                 return $board;
             }
         }
         return redirect('/');
     }
+
 
     /**
      * test

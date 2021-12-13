@@ -12,8 +12,33 @@
     </head>
     <body class="antialiased">
 
-        <a href="{{ url('/join') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Unirse a partida</a>
         <a href="{{ url('/create') }}" class="text-sm text-gray-700 dark:text-gray-500 underline">Crear partida</a>
+        <h2>Unirse a partida</h2>
+
+        <form method="POST" action="/join">
+            @csrf
+
+            <div>
+                <label for="boardId">ID Tablero</label>
+
+                <input id="boardId" name="boardId" type="number" class="@error('boardId') is-invalid @enderror">
+
+            </div>
+            <div>
+                <label for="playerName">Nombre del jugador</label>
+
+                <input id="playerName" name="playerName" type="text" value="{{ $playerName ?? '' }}" class="@error('playerName') is-invalid @enderror">
+
+            </div>
+
+            <div>
+                {{ $error ?? '' }}
+            </div>
+
+            <button type="submit">Unirse</button>
+        </form>
+
+
 
     </body>
 </html>
