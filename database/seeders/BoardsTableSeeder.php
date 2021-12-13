@@ -16,7 +16,7 @@ class BoardsTableSeeder extends Seeder
         $boardsTable->insert([
             'player1' => 'Bichota',
             'player2' => 'foo fighters',
-            'board' => json(array(
+            'board' => array(
                 1=>'X',
                 2=>'O',
                 3=>'X',
@@ -26,12 +26,13 @@ class BoardsTableSeeder extends Seeder
                 7=>'X',
                 8=>'0',
                 9=>'X',
-            )),
+            ),
+            'turn' => 1,
         ]);
         $boardsTable->insert([
             'player1' => 'Chilindrina',
             'player2' => 'Chavo',
-            'board' => json(array(
+            'board' => array(
                 1=>'X',
                 2=>'X',
                 3=>'X',
@@ -41,7 +42,8 @@ class BoardsTableSeeder extends Seeder
                 7=>'X',
                 8=>'0',
                 9=>'X',
-            )),
+            ),
+            'turn' => 2
         ]);
     }
 }

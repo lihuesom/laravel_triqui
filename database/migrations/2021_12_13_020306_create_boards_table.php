@@ -18,6 +18,7 @@ class CreateBoardsTable extends Migration
             $table->string('player1');
             $table->string('player2');
             $table->json('board');
+            $table->integer('turn');
             $table->timestamps();
         });
     }

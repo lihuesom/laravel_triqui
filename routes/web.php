@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\BoardController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,6 +13,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [BoardController::class, 'index']);
+Route::match(['get', 'post'], '/join', [BoardController::class, 'join']);
+Route::match(['get', 'post'], '/create', [BoardController::class, 'create']);
+Route::get('/board/{id}', [BoardController::class, 'board']);
+
+
+Route::get('/list', [BoardController::class, 'listBoards']);
